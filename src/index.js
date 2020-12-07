@@ -11,8 +11,16 @@ const Theme = {
   DARK: 'dark-theme',
 };
 
+const themeInLocal = localStorage.getItem('theme');
+const markup = itemsTamplate(menuItem);
+
+rememberBodyColor();
+addTemplate();
+
+function addTemplate() {}
+galleryRef.insertAdjacentHTML('beforeend', markup);
 switchToggle.addEventListener('change', addClassList);
-switchToggle.addEventListener('change', saveLocalStorage);
+switchToggle.addEventListener('change', changeLokalStorage);
 
 function addClassList() {
   const check = switchToggle.checked;
@@ -25,10 +33,8 @@ function addClassList() {
   }
 }
 
-function saveLocalStorage() {
-  const check = switchToggle.checked;
-
-  if (check) {
+function changeLokalStorage() {
+  if (switchToggle.checked) {
     localStorage.setItem('theme', Theme.DARK);
   } else {
     localStorage.removeItem('theme');
@@ -36,13 +42,9 @@ function saveLocalStorage() {
   }
 }
 
-const themeInLocal = localStorage.getItem('theme');
-
-if (themeInLocal === Theme.DARK) {
-  bodyColor.classList.add(Theme.DARK);
-  switchToggle.checked = true;
+function rememberBodyColor() {
+  if (themeInLocal === Theme.DARK) {
+    bodyColor.classList.add(Theme.DARK);
+    switchToggle.checked = true;
+  }
 }
-
-const markup = itemsTamplate(menuItem);
-
-galleryRef.insertAdjacentHTML('beforeend', markup);
